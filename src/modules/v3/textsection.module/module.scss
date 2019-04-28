@@ -1,0 +1,20 @@
+.textsection {
+  padding: 100px 20px;
+  &__icon {
+    width: 30px;
+  }
+  &__title {
+    font-size: 4rem;
+    margin-bottom: 30px;
+  }
+  &__content {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  &__image {
+    width: 200px;
+    height:200px;
+    background: url("/assets/v3/doge.jpg");
+    background-size: cover;
+  }
+}
