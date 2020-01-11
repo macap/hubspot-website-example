@@ -2,7 +2,7 @@ hapikey: null
 pathToContextDir: context
 username: null
 password: null
-portalId: null
+portalId: 123
 download-blogs:
   limit: null
 download-content:

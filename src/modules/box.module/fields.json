@@ -1,0 +1,56 @@
+[
+    {
+        "name" : "thumbnail",
+        "label" : "Image field",
+        "sortable" : false,
+        "required" : false,
+        "locked" : false,
+        "responsive" : false,
+        "resizable" : true,
+        "type" : "image",
+        "default" : {
+           "src" : "https://placehold.it/350x225",
+           "alt" : "Thumbnail",
+           "width" : 350,
+           "height" : 225
+        }
+   },
+   {
+        "name" : "text",
+        "label" : "Text field",
+        "sortable" : false,
+        "required" : false,
+        "locked" : false,
+        "validation_regex" : "",
+        "placeholder" : "Type",
+        "allow_new_line" : false,
+        "show_emoji_picker" : false,
+        "type" : "text",
+        "default" : "This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer."
+    },
+    {
+        "name" : "url",
+        "label" : "URL field",
+        "sortable" : false,
+        "required" : false,
+        "locked" : false,
+        "supported_types" : [ "EXTERNAL", "CONTENT", "FILE", "EMAIL_ADDRESS", "BLOG" ],
+        "type" : "url",
+        "default" : {
+        "type" : "CONTENT",
+        "href" : "#",
+        "content_id" : 123456789
+        }
+    },
+    {
+        "name" : "date",
+        "label" : "Date field",
+        "help_text" : "Select a date.",
+        "sortable" : false,
+        "required" : false,
+        "locked" : false,
+        "step" : 1,
+        "type" : "date",
+        "default" : 1566360000000
+    }
+]

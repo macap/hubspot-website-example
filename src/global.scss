@@ -1,1 +1,32 @@
 // this file contains default site styles (do not define components here!)
+
+@import 'scss/bootstrap/bootstrap';
+@import 'scss/bootstrap/variables';
+@import 'scss/variables';
+
+.hs_cos_wrapper_type_menu {	
+	@extend .navbar-light;
+	@extend .bg-light;
+
+	.hs-menu-wrapper {
+		@extend .container;
+		@extend .navbar;
+		@extend .navbar-expand-lg;
+		& > ul {
+			@extend .navbar-nav;
+			& > li {
+				@extend .nav-item;
+				& > a {
+					@extend .nav-link;
+				}
+			}
+		}
+	}
+}
+
+.hs-author-avatar img {
+	width: 3rem;
+	height: 3rem;
+	border-radius: 50%;
+	overflow: hidden;
+}

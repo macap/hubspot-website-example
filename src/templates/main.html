@@ -8,6 +8,32 @@
         {{ require_css("/assets/global.css") }}
     </head>
     <body>
+        <div>
+            <!-- header -->
+            {% module "header" path="/Custom/v3/modules/header" %}
+            {% menu "simple_menu" id="6579799425" %}
+            <!-- jumbotron -->
+            {% module "jumbotron" path="/Custom/v3/modules/jumbotron" %}
+            <!-- menu -->
+            <!-- text -->
+            <div class="container my-3">
+                <div class="row">
+                    <div class="col col-lg-8">
+                        <article>
+                            {% rich_text "left_column" label="Enter HTML here" html='<h1>Page title</h1><p>My rich text default content</p>' %}
+                        </article>
+                    </div>
+                    <div class="col col-lg-4">
+                        {% module "box" path="/Custom/v3/modules/box" %}
+                        {% dnd_area "main_dnd_area", class="main" %}
+                        {% end_dnd_area %}
+                    </div>
+                </div>
+                {% dnd_area "bottom_dnd_area", class="main" %}
+                {% end_dnd_area %} 
+            </div>            
+            {% module "footer" path="/Custom/v3/modules/footer" %}
+        </div>
         {{ standard_footer_includes }}
     </body>
 </html>

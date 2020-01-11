@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>{{ content.html_title }}</title>
+        <meta name="description" content="{{ content.meta_description }}">
+        {{ standard_header_includes }}
+        {{ require_css("/assets/global.css") }}
+    </head>
+    <body>
+        <div>
+            <!-- header -->
+            {% module "header" path="/Custom/v3/modules/header" %}
+            {% menu "simple_menu" id="6579799425" %}
+            <!-- jumbotron -->
+            {% module "jumbotron" path="/Custom/v3/modules/jumbotron" %}
+            <!-- menu -->
+            <!-- text -->
+            <div class="container my-3">
+                {% if is_listing_view %}
+                    {% for content in contents %}
+                        <div class="post-item">
+                            <div class="post-header">
+                                <h2><a href="{{content.absolute_url}}">{{ content.name }}</a></h2>
+                                <div id="hubspot-author_data" class="hubspot-editable" data-hubspot-form-id="author_data" data-hubspot-name="Blog Author">
+                                    Posted by <a class="author-link" href="{{ group.absolute_url }}/author/{{ content.blog_post_author.slug }}">{{ content.blog_post_author.display_name }}</a> on {{ content.publish_date_localized }}
+                                </div>
+                               {% blog_social_sharing "blog_social_sharing" overrideable=False, label='Blog Social Sharing' %}
+                            </div>
+                            <div class="post-body clearfix">
+                                <!--post summary-->
+                                {% if content.post_list_summary_featured_image %}
+                                    <div class="hs-featured-image-wrapper">
+                                        <a href="{{content.absolute_url}}" title="" class="hs-featured-image-link">
+                                            <img src="{{ content.post_list_summary_featured_image }}" alt="{{ content.featured_image_alt_text }}" class="hs-featured-image">
+                                        </a>
+                                    </div>
+                                {% endif %}
+                                {{ content.post_list_content|safe }}
+                            </div>
+                            {% if content_group.show_summary_in_listing %}
+                                <a class="more-link" href="{{ content.absolute_url }}">Read More</a>
+                            {% endif %}
+                            <div class="custom_listing_comments">
+                                {% set comments_number =  content.comment_list|length %}
+                                {% set comments_label = "Comment" if comments_number == 1 else "Comments" %}
+                                {{ comments_number }} {{ comments_label }} <a href="{{content.absolute_url}}#comments-listing">Click here to read/write comments</a>
+                            </div>
+                            {% if content.topic_list %}
+                                <p id="hubspot-topic_data"> Topics:
+                                    {% for topic in content.topic_list %}
+                                        <a class="topic-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %},{% endif %}
+                                    {% endfor %}
+                                </p>
+                            {% endif %}
+                        </div>
+                    {% endfor %}  
+                    {% if not simple_list_page %}
+                        <div class="blog-pagination">
+                            {% if last_page_num %}
+                                <a class="previous-posts-link" href="{{ blog_page_link(last_page_num) }}">Previous</a>
+                            {% endif %}
+                                <a class="all-posts-link" href="{{ group.absolute_url }}/all">All posts</a>
+                            {% if next_page_num %}
+                                <a class="next-posts-link" href="{{ blog_page_link(next_page_num) }}">Next</a>
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% else %}
+                <div class="blog-section">
+                    <div class="blog-post-wrapper cell-wrapper">
+                        <div class="section post-header">
+                           <h1>{{ content.name }}</h1>
+                            <div id="hubspot-author_data" class="hubspot-editable" data-hubspot-form-id="author_data" data-hubspot-name="Blog Author" >
+                            <span class="hs-author-label">Posted by</span>
+                             <a class="author-link" href="{{ group.absolute_url }}/author/{{ content.blog_post_author.slug }}">{{ content.blog_post_author.display_name }}</a> on {{ content.publish_date_localized }}
+                                {% if content.blog_post_author.avatar %} <div class="hs-author-avatar"> <img src="{{ content.blog_post_author.avatar }}" alt="Picture of {{ content.blog_post_author.display_name }}"> </div> {% endif %}
+                                {% if content.blog_post_author.has_social_profiles %}
+                                    <div class="hs-author-social-section">
+                                        <span class="hs-author-social-label">Find me on:</span>
+                                        <div class="hs-author-social-links">
+                                            {% if content.blog_post_author.facebook %}
+                                                <a href="{{ content.blog_post_author.facebook }}" target="_blank" class="hs-author-social-link hs-social-facebook">Facebook </a>
+                                            {% endif %}
+                                            {% if content.blog_post_author.linkedin %}
+                                                <a href="{{ content.blog_post_author.linkedin }}" target="_blank" class="hs-author-social-link hs-social-linkedin">LinkedIn</a>
+                                            {% endif %}
+                                            {% if content.blog_post_author.twitter %}
+                                                <a href="{{ content.blog_post_author.twitter }}" target="_blank" class="hs-author-social-link hs-social-twitter">Twitter </a>
+                                            {% endif %}
+                                            {% if content.blog_post_author.google_plus %}
+                                                <a href="{{ content.blog_post_author.google_plus }}?rel=author" target="_blank" class="hs-author-social-link hs-social-google-plus">Google+</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                      {% blog_social_sharing "blog_social_sharing" overrideable=False, label='Blog Social Sharing' %}
+                        <div class="section post-body">
+                            {{ content.post_body }}
+                        </div>
+                       {% if content.topic_list %}
+                             <p id="hubspot-topic_data" > Topics:
+                                {% for topic in content.topic_list %}
+                                    <a class="topic-link" href="{{ blog_tag_url(group.id, topic.slug) }}">{{ topic.name }}</a>{% if not loop.last %},{% endif %}
+                                {% endfor %}
+                             </p>
+                        {% endif %}
+                        <div class="section blog-comments">
+                            {% blog_comments "blog_comments" overrideable=False, label='Blog Comments' %}
+                        </div>
+                    </div>
+                </div>   
+                {% endif %}
+            </div>            
+            {% module "footer" path="/Custom/v3/modules/footer" %}
+        </div>
+        {{ standard_footer_includes }}
+    </body>
+</html>
